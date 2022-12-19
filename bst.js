@@ -100,6 +100,35 @@ class Tree {
         }
     }
 
+    preOrder(fn, node=this.root){
+        if (!fn){
+            if (node===null) return [];
+            let center=[node.data];
+            let left=this.preOrder(null, node.left);
+            let right=this.preOrder(null, node.right);
+            return center.concat(left,right);
+        } else {
+            if (node===null) return;
+            fn(node);
+            this.preOrder(fn, node.left);
+            this.preOrder(fn, node.right);
+        }
+    }
+
+    postOrder(fn, node=this.root){
+        if (!fn){
+            if (node===null) return [];
+            let left=this.postOrder(null, node.left);
+            let right=this.postOrder(null, node.right);
+            let center=[node.data];
+            return left.concat(right, center);
+        } else {
+            if (node===null) return;
+            this.postOrder(fn, node.left);
+            this.postOrder(fn, node.right);
+            fn(node);
+        }
+    }
 }
 
 function buildTree(array){
@@ -149,8 +178,8 @@ function enhanceArray(array){
 
 let testTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 testTree.prettyPrint();
-console.log(testTree.inOrder((node)=>console.log(node.data*2)));
+console.log(testTree.postOrder());
 
-let testTree2= new Tree([8,10,4]);
-testTree2.prettyPrint();
-console.log(testTree2.inOrder());
+// let testTree2= new Tree([8,10,4]);
+// testTree2.prettyPrint();
+// console.log(testTree2.preOrder((node)=>console.log(node.data*2)));
