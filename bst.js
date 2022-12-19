@@ -85,6 +85,21 @@ class Tree {
         }
     }
 
+    inOrder(fn, node=this.root){
+        if (!fn){
+            if (node===null) return [];
+            let left=this.inOrder(null, node.left);
+            let center=[node.data];
+            let right=this.inOrder(null, node.right);
+            return left.concat(center,right);
+        } else {
+            if (node===null) return;
+            this.inOrder(fn, node.left);
+            fn(node);
+            this.inOrder(fn, node.right);
+        }
+    }
+
 }
 
 function buildTree(array){
@@ -134,4 +149,8 @@ function enhanceArray(array){
 
 let testTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 testTree.prettyPrint();
-testTree.levelOrder();
+console.log(testTree.inOrder((node)=>console.log(node.data*2)));
+
+let testTree2= new Tree([8,10,4]);
+testTree2.prettyPrint();
+console.log(testTree2.inOrder());
