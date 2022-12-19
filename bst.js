@@ -64,6 +64,27 @@ class Tree {
         return node;
     }
 
+    levelOrder(fn, node=this.root){
+        if (node===null) return;
+        let queue=[];
+        queue.push(node);
+        let noFnArray=[]
+        while(queue.length!=0){
+            const current = queue[0];
+            if (!fn){
+                noFnArray.push(current.data);
+            } else  {
+                fn(current);
+            }
+            if (current.left!==null) queue.push(current.left);
+            if (current.right!==null) queue.push(current.right);
+            queue.shift();;
+        }
+        if (noFnArray.length!=0){
+            return noFnArray;
+        }
+    }
+
 }
 
 function buildTree(array){
@@ -113,3 +134,4 @@ function enhanceArray(array){
 
 let testTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 testTree.prettyPrint();
+testTree.levelOrder();
