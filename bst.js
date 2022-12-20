@@ -131,8 +131,9 @@ class Tree {
     }
     
     heightCounter(node){
-        let left=0;
-        let right=0;
+        if (node===null) return -1;
+        let left;
+        let right;
         if (node.left!==null && node.right!==null){
             left= 1 + this.heightCounter(node.left);
             right= 1 + this.heightCounter(node.right);
@@ -159,6 +160,23 @@ class Tree {
         } else {
             return 1 + this.depth(value, node.right);
         }
+    }
+
+    isBalanced(){
+        const nodes=this.levelOrder();
+        for (let i=0; i<nodes.length; i++){
+            const leftSubtreeHeight = this.heightCounter(this.find(nodes[i]).left) + 1;
+            const rightSubtreeHeight = this.heightCounter(this.find(nodes[i]).right) + 1;
+            if (Math.abs(leftSubtreeHeight - rightSubtreeHeight)>1){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    reBalance(){
+        const nodes=this.levelOrder();
+        this.root = buildTree(enhanceArray(nodes));
     }
 }
 
@@ -209,13 +227,10 @@ function enhanceArray(array){
 
 let testTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 testTree.insert(15);
+testTree.insert(80);
 testTree.insert(30);
-testTree.insert(35);
 testTree.prettyPrint();
-console.log(testTree.height(8));
-console.log(testTree.height(5));
-console.log(testTree.depth(324));
-
-// let testTree2= new Tree([8,10,4]);
-// testTree2.prettyPrint();
-// console.log(testTree2.preOrder((node)=>console.log(node.data*2)));
+console.log(testTree.isBalanced());
+testTree.reBalance();
+testTree.prettyPrint();
+console.log(testTree.isBalanced());
