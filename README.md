@@ -1,1 +1,1 @@
-# binary-search-trees
+The written JS file contains a Binary Tree class and its methods that allow the creation and manipulation of binary search trees. It was done with the purpose of practicing the basics of BST and to help me understand the idea behind them.

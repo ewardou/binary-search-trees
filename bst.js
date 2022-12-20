@@ -225,12 +225,26 @@ function enhanceArray(array){
     return mergeSort(removeDuplicates(array));
 }
 
-let testTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-testTree.insert(15);
-testTree.insert(80);
-testTree.insert(30);
+let testTree = new Tree([1, 7, 4, 23, 8, 9, 4, 19, 44, 3, 5, 7, 2, 9, 67, 6345, 324]);
 testTree.prettyPrint();
 console.log(testTree.isBalanced());
+console.log(testTree.levelOrder());
+console.log(testTree.inOrder());
+console.log(testTree.preOrder());
+console.log(testTree.postOrder());
+
+testTree.insert(150);
+testTree.insert(1345);
+testTree.insert(280);
+testTree.insert(117);
+testTree.insert(620);
+testTree.prettyPrint();
+console.log(testTree.isBalanced());
+
 testTree.reBalance();
 testTree.prettyPrint();
 console.log(testTree.isBalanced());
+console.log(testTree.levelOrder());
+console.log(testTree.inOrder());
+console.log(testTree.preOrder());
+console.log(testTree.postOrder());
