@@ -149,6 +149,17 @@ class Tree {
     height(value){
         return this.heightCounter(this.find(value));
     }
+
+    depth(value, node = this.root){
+        if (value===node.data){
+            return 0;
+        }
+        if (value < node.data){
+            return 1 + this.depth(value, node.left);
+        } else {
+            return 1 + this.depth(value, node.right);
+        }
+    }
 }
 
 function buildTree(array){
@@ -201,7 +212,9 @@ testTree.insert(15);
 testTree.insert(30);
 testTree.insert(35);
 testTree.prettyPrint();
-console.log(testTree.height(4));
+console.log(testTree.height(8));
+console.log(testTree.height(5));
+console.log(testTree.depth(324));
 
 // let testTree2= new Tree([8,10,4]);
 // testTree2.prettyPrint();
